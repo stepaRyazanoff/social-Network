@@ -1,0 +1,20 @@
+.items {
+	display: inline-block;
+	max-width: 100px;
+	width: 100%;
+	border-right: 1px solid #898c91;
+}
+
+.items a {
+	transition: all 0.1s;
+}
+
+.items a:hover {
+	background-color: #898c91;
+	color: #e4e8f0;
+}
+
+
+.items:not(:first-child)   {
+	padding-top: 10px;
+}

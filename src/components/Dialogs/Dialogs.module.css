@@ -1,0 +1,7 @@
+.inner {
+	display: flex;
+	justify-content: space-evenly;
+	max-width: 400px;
+}
+
+
