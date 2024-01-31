@@ -5,7 +5,8 @@ import Profile from './components/Profile/Profile'
 import Dialogs from './components/Dialogs/Dialogs'
 import {Route, Routes} from 'react-router-dom'
 
-function App({state: {profilePage: {posts}, messagesPage: {dialogs, messages}}}) {
+
+function App({state: {profilePage: {posts, postText}, messagesPage: {dialogs, messages}}, addPost, updatePostText}) {
     return (
         <div className='App'>
             <div className='container'>
@@ -15,7 +16,10 @@ function App({state: {profilePage: {posts}, messagesPage: {dialogs, messages}}})
                     <main className='main'>
                         <Routes>
                             <Route path='/dialogs/*' element={<Dialogs dialogs={dialogs} messages={messages}/>}/>
-                            <Route path='/profile' element={<Profile posts={posts}/>}/>
+                            <Route path='/profile' element={<Profile posts={posts}
+                                                                     addPost={addPost}
+                                                                     updatePostText={updatePostText}
+                                                                     postText={postText}/>}/>
                         </Routes>
                     </main>
                 </div>

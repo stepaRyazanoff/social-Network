@@ -7,8 +7,8 @@ const Post = ({ message, likes }) => {
 		<div className={cl.post}>
 			<div className={cl.postItem}>
 				<img src={image} alt='' />
-				<div>
-					{message}
+				<div className={cl.postBox}>
+					<div className={cl.message}>{message}</div>
 					<div className={cl.likes}>
 						like
 						<span> {likes}</span>

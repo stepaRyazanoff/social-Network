@@ -2,18 +2,26 @@
 	position: relative;
 	max-width: 400px;
 	width: 100%;
-	margin-bottom: 40px;
-	text-align: center;
+	margin: 0 auto;
 }
 
 .postsTop h5 {
 	padding-top: 20px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	font-size: 20px;
 	text-align-last: left;
 }
 
-.postsTop textarea {
+.postsBox {
+	min-height: 145px;
+	position: relative;
+	max-width: 400px;
+	width: 100%;
+}
+
+.postsBox textarea {
+	padding: 10px;
+	outline: none;
 	resize: none;
 	display: inline-block;
 	border: none;
@@ -22,9 +30,10 @@
 	margin-bottom: 5px;
 }
 
-.postsTop button {
+.postsBox button {
 	position: absolute;
-	bottom: -20px;
+	top: 50%;
+	transform: translateY(-50%);
 	right: 0;
 	border: none;
 	color: #fff;
