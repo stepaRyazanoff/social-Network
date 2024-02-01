@@ -1,12 +1,22 @@
 .inner {
     display: flex;
-    justify-content: space-evenly;
-    max-width: 400px;
+    justify-content: flex-start;
+    max-width: 426px;
     width: 100%;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .dialogsBox {
+    flex-basis: 80px;
+    margin-right: 20px;
+}
+
+.messagesBox {
+    max-width: 325px;
+    width: 100%;
+}
+
+.formBox {
     margin: 0 auto;
     min-height: 145px;
     position: relative;
@@ -14,7 +24,7 @@
     width: 100%;
 }
 
-.dialogsBox textarea {
+.formBox textarea {
     resize: none;
     display: inline-block;
     border: none;
@@ -23,7 +33,7 @@
     margin-bottom: 5px;
 }
 
-.dialogsBox button {
+.formBox button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);

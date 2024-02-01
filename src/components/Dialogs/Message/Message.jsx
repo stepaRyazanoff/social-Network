@@ -2,12 +2,11 @@ import React from "react"
 import cl from './Message.module.css'
 
 
-const Message = ({ message, id }) => {
-
+const Message = ({ message, number }) => {
 
    return (
       <div className={cl.messages}>
-         {id}. {message}
+         {number}. {message}
       </div>
    )
 }

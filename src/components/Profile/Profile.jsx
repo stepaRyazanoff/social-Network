@@ -3,14 +3,13 @@ import Posts from './Posts/Posts'
 import cl from './Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
 
-const Profile = ({posts, addPost, updatePostText, postText}) => {
+const Profile = ({posts, dispatch, postText}) => {
 
     return (
         <>
             <div className={cl.head}><ProfileInfo/></div>
             <Posts posts={posts}
-                   addPost={addPost}
-                   updatePostText={updatePostText}
+                   dispatch={dispatch}
                    postText={postText}/>
         </>
     )
