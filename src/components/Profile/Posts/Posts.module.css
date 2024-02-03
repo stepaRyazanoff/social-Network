@@ -13,28 +13,25 @@
 }
 
 .postsBox {
-	min-height: 145px;
-	position: relative;
+	text-align: right;
+	min-height: 60px;
 	max-width: 400px;
 	width: 100%;
+	margin-bottom: 20px;
 }
 
 .postsBox textarea {
-	padding: 10px;
-	outline: none;
+	padding: 3px 10px;
 	resize: none;
-	display: inline-block;
 	border: none;
+	border-radius: 3px;
 	width: 100%;
-	min-height: 50px;
+	height: 25px;
 	margin-bottom: 5px;
+	outline: none;
 }
 
 .postsBox button {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	right: 0;
 	border: none;
 	color: #fff;
 	background-color: black;

@@ -2,15 +2,16 @@ import React from 'react'
 import Posts from './Posts/Posts'
 import cl from './Profile.module.css'
 import ProfileInfo from './ProfileInfo/ProfileInfo'
-
-const Profile = ({posts, dispatch, postText}) => {
+import PostsContainer from "./PostsContainer";
+// {posts, dispatch, postText}
+const Profile = ({store}) => {
 
     return (
         <>
-            <div className={cl.head}><ProfileInfo/></div>
-            <Posts posts={posts}
-                   dispatch={dispatch}
-                   postText={postText}/>
+            <div className={cl.head}>
+                <ProfileInfo/>
+            </div>
+            <PostsContainer/>
         </>
     )
 }

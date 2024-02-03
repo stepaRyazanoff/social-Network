@@ -1,12 +1,12 @@
 import React from 'react'
 import cl from './Post.module.css'
-import image from '../../../../img/images2.png'
+import photoPost from '../../../../img/photo-post.png'
 
 const Post = ({ message, likes }) => {
 	return (
 		<div className={cl.post}>
 			<div className={cl.postItem}>
-				<img src={image} alt='' />
+				<img src={photoPost} alt='' />
 				<div className={cl.postBox}>
 					<div className={cl.message}>{message}</div>
 					<div className={cl.likes}>

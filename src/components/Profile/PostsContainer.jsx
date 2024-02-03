@@ -1,24 +1,37 @@
-import {addPostAC, updatePostTextAC} from "../../redux/profileReducer";
+import React from 'react'
 import Posts from "./Posts/Posts";
+import {addPostAC, updatePostTextAC} from "../../redux/profileReducer";
+import {connect} from "react-redux";
 
-class ProfileContainer extends React.Component {
+class PostsContainer extends React.Component {
     constructor() {
         super()
     }
 
     addPost() {
-        this.props.dispatch(addPostAC())
+        this.props.addPost()
     }
 
     updatePostText(text) {
-        this.props.dispatch(updatePostTextAC(text))
+        this.props.updatePostText(text)
     }
 
-    render(){
-        return(
-            <div><Posts dispatch={this.props.dispatch} posts={this.props.posts}/></div>
+    render() {
+        return (
+            <Posts posts={this.props.posts}
+                   postText={this.props.postText}
+                   addPost={this.addPost.bind(this)}
+                   updatePostText={this.updatePostText.bind(this)}/>
         )
     }
 }
 
-export default ProfileContainer
+const mapStateToProps = state => ({
+    posts: state.profilePage.posts,
+    postText: state.profilePage.postText
+})
+
+export default connect(mapStateToProps, {
+    addPost: addPostAC,
+    updatePostText: updatePostTextAC
+})(PostsContainer)

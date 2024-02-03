@@ -1,18 +1,17 @@
 import React from 'react'
 import Post from './Post/Post'
 import cl from './Posts.module.css'
-import {addPostAC, updatePostTextAC} from "../../../redux/profileReducer";
 
-const Posts = (props) => {
+const Posts = ({posts, addPost, updatePostText, postText}) => {
 
-    const postsElements = props.posts.map(p => (<Post key={p.id} message={p.message} id={p.id} likes={p.likesCount}/>))
+    const postsElements = posts.map(p => (<Post key={p.id} message={p.message} id={p.id} likes={p.likesCount}/>))
 
-    const addPost = () => {
-        props.dispatch(addPostAC())
+    const onButtonClick = () => {
+        addPost()
     }
 
     const onChangeText = (e) => {
-        props.dispatch(updatePostTextAC(e.target.value))
+        updatePostText(e.target.value)
     }
 
     return (
@@ -20,9 +19,9 @@ const Posts = (props) => {
             <div className={cl.postsTop}>
                 <h5>My Posts</h5>
                 <div className={cl.postsBox}>
-                    <textarea value={props.postText} placeholder={'Введите текст...'}
+                    <textarea value={postText} placeholder={'Введите текст...'}
                               onChange={onChangeText}></textarea>
-                    <button onClick={addPost}>Add Post</button>
+                    <button onClick={onButtonClick}>Add Post</button>
                 </div>
             </div>
             {postsElements}
