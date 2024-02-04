@@ -1,0 +1,67 @@
+.userItem {
+    position: relative;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.numId{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    min-width: 20px;
+    min-height: 20px;
+    text-align: center;
+    border: 1px solid #898c91;
+    border-radius: 50%;
+
+}
+
+.userItem span{
+    line-height: 20px;
+}
+
+.itemAbout img {
+    width: 60px;
+    height: 60px;
+    margin:  0 0 10px 10px;
+}
+
+.itemName {
+    max-width: 100%;
+}
+
+.itemName h5{
+    border: 1px solid #898c91;
+    max-width: 100%;
+    display: inline-block;
+    padding: 3px;
+    border-radius: 3px;
+    background-color: #e4e8f0;
+}
+
+.itemStatus{
+    position: absolute;
+    top: 10px;
+    left: 80px;
+    border-bottom: 1px solid #898c91;
+    padding-bottom: 5px;
+
+}
+
+.itemBtn{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border: none;
+    color: #fff;
+    background-color: black;
+    padding: 5px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+
