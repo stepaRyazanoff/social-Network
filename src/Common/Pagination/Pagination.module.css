@@ -1,0 +1,33 @@
+.pagination {
+    position: relative;
+    min-height: 30px;
+    user-select: none;
+}
+
+.paginationPages{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+}
+
+.pageNumber {
+    cursor: pointer;
+    font-size: 11px;
+    border: 1px solid #898c91;
+    padding: 1px;
+}
+
+.prevBtn,
+.nextBtn {
+    margin: 1px;
+    padding: 1px 2px;
+    border: 1px solid #898c91;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.active {
+    color: #e92dc0;
+    border-color: #e92dc0;
+}

@@ -10,10 +10,11 @@
 
 .wrapper {
 	display: flex;
-	/*min-height: 50vh;*/
+	border-right: 10px;
 }
 
 .main {
+	/*overflow: auto;*/
 	background-color: #e4e8f0;
 	max-width: 873px;
 	width: 100%;

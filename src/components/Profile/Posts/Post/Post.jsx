@@ -1,6 +1,6 @@
 import React from 'react'
 import cl from './Post.module.css'
-import photoPost from '../../../../img/photo-post.png'
+import photoPost from '../../../../assets/img/photo-post.png'
 
 const Post = ({ message, likes }) => {
 	return (

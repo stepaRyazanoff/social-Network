@@ -12,7 +12,7 @@
 }
 
 .messagesBox {
-    background-image: url(../../img/bg-dialogs.png);
+    background-image: url(../../assets/img/bg-dialogs.png);
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
