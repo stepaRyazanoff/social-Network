@@ -1,10 +1,10 @@
 import './css/App.css'
 import Header from './components/Header/Header'
 import Navbar from './components/Navbar/Navbar'
-import Profile from './components/Profile/Profile'
 import {Route, Routes} from 'react-router-dom'
 import UsersContainer from "./components/Users/UsersContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App() {
     return (
@@ -16,7 +16,7 @@ function App() {
                     <main className='main'>
                         <Routes>
                             <Route path='/dialogs/*' element={<DialogsContainer/>}/>
-                            <Route path='/profile' element={<Profile/>}/>
+                            <Route path='/profile/:profileId?' element={<ProfileContainer/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>
                         </Routes>
                     </main>

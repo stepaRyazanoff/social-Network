@@ -1,8 +1,9 @@
 import React from "react"
 import cl from './User.module.css'
 import unknownPhoto from '../../../assets/img/unknown-photo.webp'
+import {NavLink} from "react-router-dom";
 
-const User = ({userId, name, photos: {small, large}, status, followed, subscribe, unsubscribe}) => {
+const User = ({userId, name, photos: {small}, status, followed, subscribe, unsubscribe}) => {
 
     const onButtonClickSubscribe = () => {
         subscribe(userId)
@@ -12,13 +13,16 @@ const User = ({userId, name, photos: {small, large}, status, followed, subscribe
         unsubscribe(userId)
     }
 
-    const userLargePhoto = large !== null ? large : unknownPhoto
+    const userSmallPhoto = small !== null ? small : unknownPhoto
 
     return (
         <div className={cl.userItem}>
             <span className={cl.numId}>{userId}</span>
             <div className={cl.userItemPhoto}>
-                <img src={userLargePhoto} alt="photo"/>
+                <NavLink to={`/profile/${userId}`}>
+                    <img src={userSmallPhoto} alt="photo"/>
+                </NavLink>
+
             </div>
             <div className={cl.itemAbout}>
                 <div className={cl.itemName}>

@@ -14,20 +14,18 @@
 .pageNumber {
     cursor: pointer;
     font-size: 11px;
-    border: 1px solid #898c91;
-    padding: 1px;
+    padding: 2px;
 }
 
 .prevBtn,
 .nextBtn {
     margin: 1px;
     padding: 1px 2px;
-    border: 1px solid #898c91;
     cursor: pointer;
     font-size: 15px;
 }
 
 .active {
     color: #e92dc0;
-    border-color: #e92dc0;
+    font-size: 14px;
 }
