@@ -12,8 +12,12 @@ const Users = ({
                    setCurrentPage,
                    subscribe,
                    unsubscribe,
-                   isFetching
+                   isFetching,
+                   processArray,
+                   setProcessOfDisabling,
+                   setProcessTheArray,
                }) => {
+
     return (
         <div className={cl.users}>
             <div className={cl.inner}>
@@ -30,7 +34,11 @@ const Users = ({
                                            name={u.name}
                                            status={u.status}
                                            subscribe={subscribe}
-                                           unsubscribe={unsubscribe}/>)
+                                           unsubscribe={unsubscribe}
+                                           processArray={processArray}
+                                           setProcessTheArray={setProcessTheArray}
+                                           setProcessOfDisabling={setProcessOfDisabling}
+                    />)
                 }
             </div>
         </div>

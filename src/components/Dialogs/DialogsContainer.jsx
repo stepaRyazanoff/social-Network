@@ -4,9 +4,6 @@ import {sendMessageAC, updateMessageTextAC} from "../../redux/dialogsReducer";
 import {connect} from "react-redux";
 
 class DialogsContainer extends React.Component {
-    constructor() {
-        super()
-    }
 
     sendMessage() {
         this.props.sendMessage()
