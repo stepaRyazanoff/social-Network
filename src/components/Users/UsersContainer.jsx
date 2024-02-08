@@ -12,9 +12,6 @@ import {
 } from "../../redux/usersReducer";
 
 class UsersContainer extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
