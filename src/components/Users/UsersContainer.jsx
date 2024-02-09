@@ -1,7 +1,6 @@
 import React from "react"
 import {connect} from "react-redux"
 import Users from "./Users"
-import axios from "axios";
 import {
     setCurrentPage,
     setTotalCount,
@@ -12,32 +11,28 @@ import {
     setProcessTheArray,
     setProcessOfDisabling,
 } from "../../redux/usersReducer";
+import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=
-        ${this.props.pageSize}&page=${this.props.currentPage}`, {
-            withCredentials: true
-        }).then((response) => {
-            this.props.setUsers(response.data.items)
-            this.props.setTotalCount(response.data.totalCount)
-            this.props.toggleIsFetching(false)
-        })
+        usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
+            .then(data => {
+                this.props.setUsers(data.items)
+                this.props.setTotalCount(data.totalCount)
+                this.props.toggleIsFetching(false)
+            })
     }
-
 
     setCurrentPage(page) {
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=
-        ${this.props.pageSize}&page=${page}`, {
-            withCredentials: true
-        }).then((response) => {
-            this.props.setUsers(response.data.items)
-            this.props.setCurrentPage(page)
-            this.props.toggleIsFetching(false)
-        })
+        usersAPI.getUsers(this.props.pageSize, page)
+            .then(data => {
+                this.props.setUsers(data.items)
+                this.props.setCurrentPage(page)
+                this.props.toggleIsFetching(false)
+            })
     }
 
     subscribe(userId) {
@@ -85,6 +80,6 @@ export default connect(mapStateToProps, {
     subscribe,
     unsubscribe,
     toggleIsFetching,
-    setProcessOfDisabling,
     setProcessTheArray,
+    setProcessOfDisabling,
 })(UsersContainer)

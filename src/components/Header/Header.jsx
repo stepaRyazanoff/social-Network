@@ -15,7 +15,7 @@ const Header = ({userPhoto, id, email, login, isAuth}) => {
                     {isAuth
                         ? <>
                             <div className={cl.email}>{email}</div>
-                            <img src={headerPhoto} alt=""/>
+                            {<img src={headerPhoto}  alt=""/> || ''}
                         </>
                         : <NavLink to={'/login'}>Login</NavLink>}
 

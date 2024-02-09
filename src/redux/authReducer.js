@@ -32,4 +32,4 @@ export const authReducer = (state = initialState, action) => {
 export const setAuthUserData = (userId, login, email) => ({
     type: SET_AUTH_USER_DATA, data: {userId, login, email}
 })
-export const setUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
+export const setAuthUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
