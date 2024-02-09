@@ -13,11 +13,9 @@ const Users = ({
                    subscribe,
                    unsubscribe,
                    isFetching,
-                   processArray,
-                   setProcessOfDisabling,
-                   setProcessTheArray,
+                   followingInProgress,
+                   toggleFollowingProgress,
                }) => {
-
     return (
         <div className={cl.users}>
             <div className={cl.inner}>
@@ -35,9 +33,8 @@ const Users = ({
                                            status={u.status}
                                            subscribe={subscribe}
                                            unsubscribe={unsubscribe}
-                                           processArray={processArray}
-                                           setProcessTheArray={setProcessTheArray}
-                                           setProcessOfDisabling={setProcessOfDisabling}
+                                           followingInProgress={followingInProgress}
+                                           toggleFollowingProgress={toggleFollowingProgress}
                     />)
                 }
             </div>

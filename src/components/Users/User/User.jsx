@@ -12,30 +12,25 @@ const User = ({
                   followed,
                   subscribe,
                   unsubscribe,
-                  processArray,
-                  setProcessTheArray,
-                  setProcessOfDisabling,
+                  followingInProgress,
+                  toggleFollowingProgress,
               }) => {
 
     const onButtonClickSubscribe = (id) => {
-        setProcessOfDisabling(true)
-        setProcessTheArray(id)
+        toggleFollowingProgress(id, true)
         usersAPI.setSubscribe(id)
             .then(response => {
                 subscribe(id)
-                setProcessOfDisabling(false)
-                setProcessTheArray(id)
+                toggleFollowingProgress(id, false)
             })
     }
 
     const onButtonClickUnsubscribe = (id) => {
-        setProcessOfDisabling(true)
-        setProcessTheArray(id)
+        toggleFollowingProgress(id, true)
         usersAPI.deleteSubscribe(id)
             .then(response => {
                 unsubscribe(id)
-                setProcessOfDisabling(false)
-                setProcessTheArray(id)
+                toggleFollowingProgress(id, false)
             })
     }
 
@@ -55,7 +50,7 @@ const User = ({
                 </div>
                 <div className={cl.itemStatus}>{status}</div>
                 {!followed && <button
-                    disabled={processArray.some(u => u === userId)}
+                    disabled={followingInProgress.some(u => u === userId)}
                     onClick={() => {
                         onButtonClickSubscribe(userId)
                     }}
@@ -63,7 +58,7 @@ const User = ({
                     Подписаться
                 </button>}
                 {followed && <button
-                    disabled={processArray.some(u => u === userId)}
+                    disabled={followingInProgress.some(u => u === userId)}
                     onClick={() => {
                         onButtonClickUnsubscribe(userId)
                     }}

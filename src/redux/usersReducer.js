@@ -4,8 +4,7 @@ const SET_USERS = 'SET_USERS'
 const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-const SET_PROCESS_THE_ARRAY = 'SET_PROCESS_THE_ARRAY'
-const SET_PROCESS_OF_DISABLING = 'SET_PROCESS_OF_DISABLING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 const initialState = {
     users: [],
@@ -13,8 +12,7 @@ const initialState = {
     currentPage: 1,
     pageSize: 5,
     isFetching: false,
-    processArray: [],
-    inProcess: false,
+    followingInProgress: [],
 }
 
 export const usersReducer = (state = initialState, action) => {
@@ -55,18 +53,12 @@ export const usersReducer = (state = initialState, action) => {
                 isFetching: action.isFetching
             }
 
-        case SET_PROCESS_OF_DISABLING:
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
             return {
                 ...state,
-                inProcess: action.inProcess
-            }
-
-        case SET_PROCESS_THE_ARRAY:
-            return {
-                ...state,
-                processArray: state.inProcess
-                    ? [...state.processArray, action.id]
-                    : state.processArray.filter(u => u !== action.id)
+                followingInProgress: action.inProgress
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId)
             }
 
         default:
@@ -74,11 +66,10 @@ export const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const setUsers = (users) => ({type: SET_USERS, users})
-export const setTotalCount = (totalUsersCount) => ({type: SET_TOTAL_COUNT, totalUsersCount})
-export const setCurrentPage = (page) => ({type: SET_CURRENT_PAGE, page})
-export const subscribe = (userId) => ({type: SUBSCRIBE, userId})
-export const unsubscribe = (userId) => ({type: UNSUBSCRIBE, userId})
-export const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
-export const setProcessTheArray = (id) => ({type: SET_PROCESS_THE_ARRAY, id})
-export const setProcessOfDisabling = (inProcess) => ({type: SET_PROCESS_OF_DISABLING, inProcess})
+export const setUsers = users => ({type: SET_USERS, users})
+export const setTotalCount = totalUsersCount => ({type: SET_TOTAL_COUNT, totalUsersCount})
+export const setCurrentPage = page => ({type: SET_CURRENT_PAGE, page})
+export const subscribe = userId => ({type: SUBSCRIBE, userId})
+export const unsubscribe = userId => ({type: UNSUBSCRIBE, userId})
+export const toggleIsFetching = isFetching => ({type: TOGGLE_IS_FETCHING, isFetching})
+export const toggleFollowingProgress = (userId, inProgress) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, userId, inProgress})

@@ -8,8 +8,7 @@ import {
     subscribe,
     unsubscribe,
     toggleIsFetching,
-    setProcessTheArray,
-    setProcessOfDisabling,
+    toggleFollowingProgress,
 } from "../../redux/usersReducer";
 import {usersAPI} from "../../api/api";
 
@@ -51,9 +50,8 @@ class UsersContainer extends React.Component {
                        pageSize={this.props.pageSize}
                        currentPage={this.props.currentPage}
                        isFetching={this.props.isFetching}
-                       setProcessOfDisabling={this.props.setProcessOfDisabling}
-                       setProcessTheArray={this.props.setProcessTheArray}
-                       processArray={this.props.processArray}
+                       toggleFollowingProgress={this.props.toggleFollowingProgress}
+                       followingInProgress={this.props.followingInProgress}
                        setCurrentPage={this.setCurrentPage.bind(this)}
                        unsubscribe={this.unsubscribe.bind(this)}
                        subscribe={this.subscribe.bind(this)}
@@ -69,8 +67,7 @@ const mapStateToProps = state => ({
     currentPage: state.usersPage.currentPage,
     pageSize: state.usersPage.pageSize,
     isFetching: state.usersPage.isFetching,
-    processArray: state.usersPage.processArray,
-    inProcess: state.usersPage.inProcess,
+    followingInProgress: state.usersPage.followingInProgress,
 })
 
 export default connect(mapStateToProps, {
@@ -80,6 +77,5 @@ export default connect(mapStateToProps, {
     subscribe,
     unsubscribe,
     toggleIsFetching,
-    setProcessTheArray,
-    setProcessOfDisabling,
+    toggleFollowingProgress,
 })(UsersContainer)
