@@ -2,7 +2,7 @@ import React from "react"
 import cl from './User.module.css'
 import unknownPhoto from '../../../assets/img/unknown-photo.webp'
 import {NavLink} from "react-router-dom";
-import {usersAPI} from "../../../api/api";
+
 
 const User = ({
                   name,
@@ -10,28 +10,17 @@ const User = ({
                   userId,
                   status,
                   followed,
+                  followingInProgress,
                   subscribe,
                   unsubscribe,
-                  followingInProgress,
-                  toggleFollowingProgress,
               }) => {
 
     const onButtonClickSubscribe = (id) => {
-        toggleFollowingProgress(id, true)
-        usersAPI.setSubscribe(id)
-            .then(response => {
-                subscribe(id)
-                toggleFollowingProgress(id, false)
-            })
+        subscribe(id)
     }
 
     const onButtonClickUnsubscribe = (id) => {
-        toggleFollowingProgress(id, true)
-        usersAPI.deleteSubscribe(id)
-            .then(response => {
-                unsubscribe(id)
-                toggleFollowingProgress(id, false)
-            })
+        unsubscribe(id)
     }
 
     const userSmallPhoto = small !== null ? small : unknownPhoto

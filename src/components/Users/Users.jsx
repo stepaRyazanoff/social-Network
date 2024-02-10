@@ -14,7 +14,6 @@ const Users = ({
                    unsubscribe,
                    isFetching,
                    followingInProgress,
-                   toggleFollowingProgress,
                }) => {
     return (
         <div className={cl.users}>
@@ -33,10 +32,8 @@ const Users = ({
                                            status={u.status}
                                            subscribe={subscribe}
                                            unsubscribe={unsubscribe}
-                                           followingInProgress={followingInProgress}
-                                           toggleFollowingProgress={toggleFollowingProgress}
-                    />)
-                }
+                                           followingInProgress={followingInProgress}/>
+                    )}
             </div>
         </div>
     )

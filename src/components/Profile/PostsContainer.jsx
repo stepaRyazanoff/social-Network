@@ -4,9 +4,6 @@ import {addPostAC, updatePostTextAC} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 
 class PostsContainer extends React.Component {
-    constructor() {
-        super()
-    }
 
     addPost() {
         this.props.addPost()
