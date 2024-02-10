@@ -1,10 +1,10 @@
 import React from 'react'
 import Dialogs from "./Dialogs";
-import {sendMessageAC, updateMessageTextAC} from "../../redux/dialogsReducer";
+import {sendMessage, updateMessageText} from "../../redux/dialogsReducer";
 import {connect} from "react-redux";
+import {withRedirect} from "../../hoc/withRedirect";
 
 class DialogsContainer extends React.Component {
-
     sendMessage() {
         this.props.sendMessage()
     }
@@ -14,6 +14,7 @@ class DialogsContainer extends React.Component {
     }
 
     render() {
+
         return (
             <Dialogs dialogs={this.props.dialogs}
                      messages={this.props.messages}
@@ -24,7 +25,6 @@ class DialogsContainer extends React.Component {
     }
 }
 
-
 const mapStateToProps = state => ({
     dialogs: state.dialogsPage.dialogs,
     messages: state.dialogsPage.messages,
@@ -32,6 +32,6 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {
-    sendMessage: sendMessageAC,
-    updateMessageText: updateMessageTextAC
-})(DialogsContainer)
+    sendMessage,
+    updateMessageText
+})(withRedirect(DialogsContainer))

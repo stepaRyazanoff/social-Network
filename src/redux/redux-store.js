@@ -1,4 +1,8 @@
-import {applyMiddleware, combineReducers, legacy_createStore as createStore} from "redux"
+import {
+    applyMiddleware,
+    combineReducers,
+    legacy_createStore as createStore
+} from "redux"
 import {profileReducer} from "./profileReducer"
 import {dialogsReducer} from "./dialogsReducer"
 import {usersReducer} from "./usersReducer";

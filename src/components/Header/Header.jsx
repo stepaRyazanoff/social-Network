@@ -3,8 +3,9 @@ import cl from './Header.module.css'
 import {NavLink} from "react-router-dom";
 
 const Header = ({userPhoto, id, email, login, isAuth}) => {
-
     const headerPhoto = !userPhoto ? '' : userPhoto
+
+
     return (
         <header className={cl.header}>
             <div className={cl.headerInner}>
@@ -15,7 +16,7 @@ const Header = ({userPhoto, id, email, login, isAuth}) => {
                     {isAuth
                         ? <>
                             <div className={cl.email}>{email}</div>
-                            {<img src={headerPhoto}  alt=""/> || ''}
+                            {<img src={headerPhoto} alt=""/> || ''}
                         </>
                         : <NavLink to={'/login'}>Login</NavLink>}
 

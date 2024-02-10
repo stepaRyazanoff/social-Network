@@ -18,17 +18,13 @@ export const usersAPI = {
     setSubscribe: async id => {
         const response = await
             instance.post(`follow/${id}`)
-        if (response.data.resultCode === 0) {
-            return response
-        }
+        return response.data
     },
 
     deleteSubscribe: async id => {
         const response = await
             instance.delete(`follow/${id}`)
-        if (response.data.resultCode === 0) {
-            return response
-        }
+        return response.data
     }
 }
 
@@ -36,9 +32,7 @@ export const authAPI = {
     authMe: async () => {
         const response = await
             instance.get('auth/me')
-        if (response.data.resultCode === 0) {
-            return response.data.data
-        }
+        return response.data
     },
 
     getAuthPhoto: async userId => {
@@ -49,7 +43,7 @@ export const authAPI = {
 }
 
 export const profileAPI = {
-    getUserProfile: async id => {
+    getProfile: async id => {
         const response = await
             instance.get(`profile/${id}`)
         return response.data

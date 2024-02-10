@@ -71,8 +71,8 @@ export const usersReducer = (state = initialState, action) => {
 const setCurrentPage = page => ({type: SET_CURRENT_PAGE, page})
 const setUsers = users => ({type: SET_USERS, users})
 const setTotalCount = totalUsersCount => ({type: SET_TOTAL_COUNT, totalUsersCount})
-const subscribe = userId => ({type: SUBSCRIBE, userId})
-const unsubscribe = userId => ({type: UNSUBSCRIBE, userId})
+const subscribeSuccess = userId => ({type: SUBSCRIBE, userId})
+const unsubscribeSuccess = userId => ({type: UNSUBSCRIBE, userId})
 const toggleIsFetching = isFetching => ({type: TOGGLE_IS_FETCHING, isFetching})
 const toggleFollowingProgress = (userId, inProgress) => ({
     type: TOGGLE_IS_FOLLOWING_PROGRESS, userId, inProgress
@@ -92,17 +92,21 @@ export const getUsers = (pageSize, currentPage) => dispatch => {
 export const subscribeToUser = userId => dispatch => {
     dispatch(toggleFollowingProgress(userId, true))
     usersAPI.setSubscribe(userId)
-        .then(() => {
-            dispatch(subscribe(userId))
-            dispatch(toggleFollowingProgress(userId, false))
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(subscribeSuccess(userId))
+                dispatch(toggleFollowingProgress(userId, false))
+            }
         })
 }
 
 export const unsubscribeFromUser = userId => dispatch => {
     dispatch(toggleFollowingProgress(userId, true))
     usersAPI.deleteSubscribe(userId)
-        .then(() => {
-            dispatch(unsubscribe(userId))
-            dispatch(toggleFollowingProgress(userId, false))
+        .then((data) => {
+            if (data.resultCode === 0) {
+                dispatch(unsubscribeSuccess(userId))
+                dispatch(toggleFollowingProgress(userId, false))
+            }
         })
 }

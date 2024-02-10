@@ -4,7 +4,7 @@ import {setUserProfile} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {withRouter} from "../../hoc/withRouter";
 import Preloader from "../../Common/Preloader/Preloader";
-import {profileAPI} from "../../api/api";
+import {withRedirect} from "../../hoc/withRedirect";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -12,8 +12,7 @@ class ProfileContainer extends React.Component {
         if (!profileId) {
             profileId = 29961
         }
-        profileAPI.getUserProfile(profileId)
-            .then(data => this.props.setUserProfile(data))
+        this.props.setUserProfile(profileId)
     }
 
     render() {
@@ -21,7 +20,7 @@ class ProfileContainer extends React.Component {
             <>
                 {!this.props.profile
                     ? <Preloader/>
-                    : <Profile {...this.props.profile}/>}
+                    : <Profile {...this.props.profile} isAuth={this.props.isAuth}/>}
             </>
         )
     }
@@ -33,4 +32,4 @@ const mapStateToProps = state => ({
 
 export default connect
 (mapStateToProps, {setUserProfile})
-(withRouter(ProfileContainer))
+(withRouter(withRedirect(ProfileContainer)))

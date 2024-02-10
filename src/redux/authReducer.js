@@ -1,3 +1,5 @@
+import {authAPI} from "../api/api";
+
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 const SET_USER_PHOTO = 'SET_USER_PHOTO'
 
@@ -29,7 +31,21 @@ export const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setAuthUserData = (userId, login, email) => ({
+const setAuthUserData = (userId, login, email) => ({
     type: SET_AUTH_USER_DATA, data: {userId, login, email}
 })
-export const setAuthUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
+const setAuthUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
+
+export const authMe = () => dispatch => {
+    authAPI.authMe()
+        .then(authData => {
+            if (authData.resultCode === 0) {
+                authAPI.getAuthPhoto(authData.data.id)
+                    .then(photo => {
+                        const {id, login, email} = authData.data
+                        dispatch(setAuthUserPhoto(photo))
+                        dispatch(setAuthUserData(id, login, email))
+                    })
+            }
+        })
+}

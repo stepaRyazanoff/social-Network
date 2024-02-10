@@ -1,8 +1,16 @@
 import React from 'react'
 import cl from './ProfileInfo.module.css'
 import image from '../../../assets/img/unknown-photo.webp'
+import {Navigate} from "react-router";
 
-const ProfileInfo = ({photos: {large}, fullName, lookingForAJob, lookingForAJobDescription, aboutMe, contacts}) => {
+const ProfileInfo = ({
+                         photos: {large},
+                         fullName,
+                         lookingForAJob,
+                         lookingForAJobDescription,
+                         aboutMe,
+                         contacts,
+                     }) => {
 
     const userLargePhoto = !large ? image : large
 
@@ -20,7 +28,6 @@ const ProfileInfo = ({photos: {large}, fullName, lookingForAJob, lookingForAJobD
                 </div>
                 <div className={cl.contacts}></div>
             </div>
-
         </div>
     )
 }
