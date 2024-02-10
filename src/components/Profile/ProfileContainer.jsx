@@ -1,10 +1,11 @@
 import React from 'react'
 import Profile from "./Profile";
-import {setUserProfile} from "../../redux/profileReducer";
 import {connect} from "react-redux";
 import {withRouter} from "../../hoc/withRouter";
-import Preloader from "../../Common/Preloader/Preloader";
 import {withRedirect} from "../../hoc/withRedirect";
+import Preloader from "../../Common/Preloader/Preloader";
+import {setUserProfile} from "../../redux/profileReducer";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -30,6 +31,5 @@ const mapStateToProps = state => ({
     profile: state.profilePage.profile,
 })
 
-export default connect
-(mapStateToProps, {setUserProfile})
-(withRouter(withRedirect(ProfileContainer)))
+export default compose(withRedirect,withRouter,connect
+(mapStateToProps, {setUserProfile}))(ProfileContainer)

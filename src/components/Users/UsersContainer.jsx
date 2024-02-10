@@ -6,6 +6,7 @@ import {
     subscribeToUser,
     unsubscribeFromUser,
 } from "../../redux/usersReducer";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component {
 
@@ -52,8 +53,8 @@ const mapStateToProps = state => ({
     followingInProgress: state.usersPage.followingInProgress,
 })
 
-export default connect(mapStateToProps, {
+export default compose(connect(mapStateToProps, {
     getUsers,
     subscribeToUser,
     unsubscribeFromUser,
-})(UsersContainer)
+}))(UsersContainer)
