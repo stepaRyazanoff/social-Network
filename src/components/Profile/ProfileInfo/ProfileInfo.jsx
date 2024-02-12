@@ -1,7 +1,7 @@
 import React from 'react'
 import cl from './ProfileInfo.module.css'
 import image from '../../../assets/img/unknown-photo.webp'
-import {Navigate} from "react-router";
+import ProfileStatus from "../ProfileStatus/ProfileStatus";
 
 const ProfileInfo = ({
                          photos: {large},
@@ -10,6 +10,8 @@ const ProfileInfo = ({
                          lookingForAJobDescription,
                          aboutMe,
                          contacts,
+                         userStatus,
+                         updateStatus
                      }) => {
 
     const userLargePhoto = !large ? image : large
@@ -21,6 +23,7 @@ const ProfileInfo = ({
                     <img src={userLargePhoto} alt=""/>
                     <div className={cl.headName}>{fullName}</div>
                 </div>
+                <ProfileStatus userStatus={userStatus} updateStatus={updateStatus}/>
                 <div className={cl.content}>
                     <div className={cl.about}>About me: {aboutMe}</div>
                     <div className={cl.job}>lookingForAJob: {lookingForAJob}</div>

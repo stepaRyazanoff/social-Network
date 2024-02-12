@@ -1,6 +1,6 @@
 import React from 'react'
-import Posts from "./Posts/Posts";
-import {addPostAC, updatePostTextAC} from "../../redux/profileReducer";
+import Posts from "./Posts";
+import {addPostAC, updatePostTextAC} from "../../../redux/profileReducer";
 import {connect} from "react-redux";
 
 class PostsContainer extends React.Component {

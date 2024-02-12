@@ -47,6 +47,20 @@ export const profileAPI = {
         const response = await
             instance.get(`profile/${id}`)
         return response.data
+    },
+
+    getUserStatus: async userId => {
+        const response = await
+            instance.get(`profile/status/${userId}`)
+        return response.data
+    },
+
+    updateUserStatus: async newStatus => {
+        const response = await
+            instance.put('profile/status', {
+                status: newStatus
+            })
+        return response.data
     }
 }
 
