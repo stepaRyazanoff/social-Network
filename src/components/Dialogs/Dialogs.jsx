@@ -1,19 +1,20 @@
 import React from 'react'
 import cl from './Dialogs.module.css'
 import Message from './Message/Message'
+import DialogsForm from "./DialogsForm"
 import DialogItem from './DialogItem/DialogItem'
 
-const Dialogs = ({dialogs, messages, messageText, sendMessage, updateMessageText}) => {
+const Dialogs = ({dialogs, messages, sendMessage}) => {
 
     const dialogsElements = dialogs.map(d => (<DialogItem key={d.id} name={d.name} id={d.id}/>))
     const messagesElements = messages.map((m, index) => (<Message key={m.id} number={index + 1} message={m.message}/>))
 
-    const onButtonClick = () => {
-        sendMessage()
+    const onButtonClick = (messageText) => {
+        sendMessage(messageText)
     }
 
-    const onChangeText = (e) => {
-        updateMessageText(e.target.value)
+    const onSubmit = (dialogsData) => {
+        onButtonClick(dialogsData.dialogs)
     }
 
     return (
@@ -22,15 +23,12 @@ const Dialogs = ({dialogs, messages, messageText, sendMessage, updateMessageText
                 <div className={cl.dialogsBox}>
                     {dialogsElements}
                 </div>
-                    <div className={cl.messagesBox}>
-                        {messagesElements}
-                    </div>
+                <div className={cl.messagesBox}>
+                    {messagesElements}
+                </div>
             </div>
             <div className={cl.formBox}>
-                <textarea value={messageText}
-                          onChange={onChangeText}
-                          placeholder='Введите сообщение...'></textarea>
-                <button onClick={onButtonClick}>Send message</button>
+                <DialogsForm onSubmit={onSubmit}/>
             </div>
         </div>
     )

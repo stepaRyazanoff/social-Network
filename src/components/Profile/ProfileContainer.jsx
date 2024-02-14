@@ -3,7 +3,7 @@ import {compose} from "redux"
 import Profile from "./Profile"
 import {connect} from "react-redux"
 import {withRouter} from "../../hoc/withRouter"
-import Preloader from "../../Common/Preloader/Preloader"
+import Preloader from "../common/Preloader/Preloader"
 import {getUserStatus, setUserProfile, updateUserStatus} from "../../redux/profileReducer"
 
 class ProfileContainer extends React.Component {

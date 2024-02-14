@@ -1,0 +1,27 @@
+.loginForm {
+    padding: 10px;
+}
+
+.loginInput {
+    margin: 0 auto 20px;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-bottom: 1px solid #898c91;
+    background-color: #e4e8f0;
+}
+
+.checkbox {
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 10px;
+    margin-bottom: 40px;
+}
+
+.loginBtn {
+    border: none;
+    color: #fff;
+    background-color: black;
+    padding: 5px 50px;
+    border-radius: 3px;
+}

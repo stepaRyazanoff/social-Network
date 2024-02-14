@@ -36,6 +36,11 @@ button {
     cursor: pointer;
 }
 
+input {
+    padding: 0;
+    margin: 0;
+}
+
 body {
     font-family: "Unbounded-Regular", serif;
     font-size: 12px;

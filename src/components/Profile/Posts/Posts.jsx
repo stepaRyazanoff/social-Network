@@ -1,17 +1,18 @@
 import React from 'react'
 import Post from './Post/Post'
 import cl from './Posts.module.css'
+import PostsForm from "./PostsForm"
 
-const Posts = ({posts, addPost, updatePostText, postText}) => {
+const Posts = ({posts, addPost}) => {
 
     const postsElements = posts.map(p => (<Post key={p.id} message={p.message} id={p.id} likes={p.likesCount}/>))
 
-    const onButtonClick = () => {
-        addPost()
+    const onButtonClick = (postText) => {
+        addPost(postText)
     }
 
-    const onChangeText = (e) => {
-        updatePostText(e.target.value)
+    const onSubmit = (postsData) => {
+        onButtonClick(postsData.posts)
     }
 
     return (
@@ -19,9 +20,7 @@ const Posts = ({posts, addPost, updatePostText, postText}) => {
             <div className={cl.postsTop}>
                 <h5>My Posts</h5>
                 <div className={cl.postsBox}>
-                    <textarea value={postText} placeholder={'Введите текст...'}
-                              onChange={onChangeText}></textarea>
-                    <button onClick={onButtonClick}>Add Post</button>
+                    <PostsForm onSubmit={onSubmit}/>
                 </div>
             </div>
             {postsElements}
