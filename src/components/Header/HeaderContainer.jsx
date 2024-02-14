@@ -1,7 +1,9 @@
 import React from "react"
-import Header from "./Header";
-import {connect} from "react-redux";
-import {authMe} from "../../redux/authReducer";
+import Header from "./Header"
+import {connect} from "react-redux"
+import {authMe} from "../../redux/authReducer"
+import {compose} from "redux"
+// import {withRedirect} from "../../hoc/withRedirect"
 
 class HeaderContainer extends React.Component {
     componentDidMount() {
@@ -28,7 +30,9 @@ const mapStateToProps = state => ({
     isAuth: state.auth.isAuth,
 })
 
-export default connect(mapStateToProps,
-    {
-        authMe,
-    })(HeaderContainer)
+export default compose(
+    connect(
+        mapStateToProps,
+        {
+            authMe,
+        }))(HeaderContainer)

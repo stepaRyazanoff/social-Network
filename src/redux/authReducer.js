@@ -1,4 +1,4 @@
-import {authAPI} from "../api/api";
+import {authAPI} from "../api/api"
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
 const SET_USER_PHOTO = 'SET_USER_PHOTO'
@@ -17,7 +17,6 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
 
         case SET_USER_PHOTO:
@@ -31,8 +30,8 @@ export const authReducer = (state = initialState, action) => {
     }
 }
 
-const setAuthUserData = (userId, login, email) => ({
-    type: SET_AUTH_USER_DATA, data: {userId, login, email}
+const setAuthUserData = (userId, login, email, isAuth) => ({
+    type: SET_AUTH_USER_DATA, data: {userId, login, email, isAuth}
 })
 const setAuthUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
 
@@ -44,8 +43,26 @@ export const authMe = () => dispatch => {
                     .then(photo => {
                         const {id, login, email} = authData.data
                         dispatch(setAuthUserPhoto(photo))
-                        dispatch(setAuthUserData(id, login, email))
+                        dispatch(setAuthUserData(id, login, email, true))
                     })
+            }
+        })
+}
+
+export const login = (email, password, rememberMe, captcha) => dispatch => {
+    authAPI.login(email, password, rememberMe, captcha)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(authMe())
+            }
+        })
+}
+
+export const logout = () => dispatch => {
+    authAPI.logout()
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setAuthUserData(null, null, null, false))
             }
         })
 }

@@ -2,8 +2,12 @@ import React from 'react'
 import cl from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
 
-const Navbar = () => {
+const Navbar = ({logOut}) => {
     const setActive = ({isActive}) => (isActive ? 'active-link' : '')
+
+    const onClicked = () => {
+        logOut()
+    }
 
     return (
         <aside className={cl.sidebar}>
@@ -18,19 +22,23 @@ const Navbar = () => {
                         <NavLink to='/dialogs' className={setActive}>
                             Dialogs
                         </NavLink>
-                    </li><li>
+                    </li>
+                    <li>
                         <NavLink to='/users' className={setActive}>
                             Users
                         </NavLink>
                     </li>
                     <li>
-                        <a href='/#'>News</a>
+                        <a>News</a>
                     </li>
                     <li>
-                        <a href='/#'>Music</a>
+                        <a>Music</a>
                     </li>
                     <li>
-                        <a href='/#'>Settings</a>
+                        <a>Settings</a>
+                    </li>
+                    <li className={cl.logout} onClick={onClicked}>
+                        <a>LogOut</a>
                     </li>
                 </ul>
             </nav>

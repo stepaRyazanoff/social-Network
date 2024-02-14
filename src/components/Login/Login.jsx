@@ -1,11 +1,11 @@
 import React from "react"
 import cl from './Login.module.css'
-import LoginForm from "./LoginForm";
+import LoginForm from "./LoginForm"
 
-const Login = () => {
-
-    const onSubmit = (data) => {
-        console.log(data)
+const Login = ({logIn}) => {
+    const onSubmit = (loginData) => {
+        const {login, password, rememberMe} = loginData
+        logIn(login, password, rememberMe)
     }
 
     return (

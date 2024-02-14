@@ -1,11 +1,11 @@
 import './css/App.css'
-import Navbar from './components/Navbar/Navbar'
 import {Route, Routes} from 'react-router-dom'
-import UsersContainer from "./components/Users/UsersContainer";
-import HeaderContainer from "./components/Header/HeaderContainer";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
-import Login from "./components/Login/Login";
+import UsersContainer from "./components/Users/UsersContainer"
+import HeaderContainer from "./components/Header/HeaderContainer"
+import DialogsContainer from "./components/Dialogs/DialogsContainer"
+import ProfileContainer from "./components/Profile/ProfileContainer"
+import LoginContainer from "./components/Login/LoginContainer"
+import NavbarContainer from "./components/Navbar/NavbarContainer"
 
 function App() {
     return (
@@ -13,13 +13,13 @@ function App() {
             <div className='container'>
                 <HeaderContainer/>
                 <div className='wrapper'>
-                    <Navbar/>
+                    <NavbarContainer/>
                     <main className='main'>
                         <Routes>
                             <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                             <Route path='/profile/:profileId?' element={<ProfileContainer/>}/>
                             <Route path='/users' element={<UsersContainer/>}/>
-                            <Route path='/login' element={<Login/>}/>
+                            <Route path='/login' element={<LoginContainer/>}/>
                         </Routes>
                     </main>
                 </div>

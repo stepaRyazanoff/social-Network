@@ -39,6 +39,23 @@ export const authAPI = {
         const response = await
             instance.get(`profile/${userId}`)
         return response.data.photos.small
+    },
+
+    login: async (email, password, rememberMe = false, captcha) => {
+        const response = await
+            instance.post('auth/login', {
+                email,
+                password,
+                rememberMe,
+                captcha
+            })
+        return response.data
+    },
+
+    logout: async () => {
+        const response = await
+            instance.delete('auth/login')
+        return response.data
     }
 }
 
