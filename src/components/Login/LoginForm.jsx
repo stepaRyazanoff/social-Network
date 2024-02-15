@@ -1,14 +1,15 @@
 import React from "react"
-import cl from "./LoginForm.module.css"
+import cn from "classnames"
 import {reduxForm} from "redux-form"
+import cl from "./LoginForm.module.css"
 import {Input} from "../common/FormsControls/FormsControls"
 import {createField} from "../../helpers/createField"
 import {required} from "../../utils/validators"
 
-const LoginForm = ({handleSubmit}) => {
+const LoginForm = ({handleSubmit, error}) => {
 
     return (
-        <form onSubmit={handleSubmit} className={cl.loginForm}>
+        <form onSubmit={handleSubmit} className={cn(cl.loginForm, {[cl.summaryError]: error})}>
             {createField(
                 'login',
                 required,
@@ -23,6 +24,10 @@ const LoginForm = ({handleSubmit}) => {
                 Input,
                 'password',
                 'password')}
+            {error
+                ? <span className={cl.errorText}>{error}</span>
+                : ''
+            }
             {createField(
                 'rememberMe',
                 required,

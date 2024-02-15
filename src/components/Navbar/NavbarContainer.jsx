@@ -17,7 +17,6 @@ const NavbarContainer = ({logout}) => {
 }
 
 export default compose(
-    // withRedirect,
     connect(
         null,
         {logout}))

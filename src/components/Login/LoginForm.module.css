@@ -9,6 +9,12 @@
     padding: 5px;
     border-bottom: 1px solid #898c91;
     background-color: #e4e8f0;
+    opacity: .6;
+}
+
+.loginInput::placeholder {
+    letter-spacing: .3px;
+    font-size: 12px;
 }
 
 .checkbox {
@@ -16,6 +22,11 @@
     justify-content: space-evenly;
     padding-top: 10px;
     margin-bottom: 40px;
+    opacity: .6;
+}
+
+.checkbox span{
+    font-size: 10px;
 }
 
 .loginBtn {
@@ -24,4 +35,16 @@
     background-color: black;
     padding: 5px 50px;
     border-radius: 3px;
+}
+
+.summaryError .loginInput {
+    border-color: #d70202;
+    color: #d70202;
+}
+
+.summaryError .errorText {
+    display: inline-block;
+    padding: 20px 0;
+    color: #d70202;
+    font-weight: 500;
 }

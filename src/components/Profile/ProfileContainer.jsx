@@ -4,14 +4,18 @@ import Profile from "./Profile"
 import {connect} from "react-redux"
 import {withRouter} from "../../hoc/withRouter"
 import Preloader from "../common/Preloader/Preloader"
-import {getUserStatus, setUserProfile, updateUserStatus} from "../../redux/profileReducer"
+import {
+    getUserStatus,
+    setUserProfile,
+    updateUserStatus
+} from "../../redux/profileReducer"
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
+
         let profileId = this.props.router.params.profileId
-        if (!profileId) {
-            profileId = 29961
-        }
+        if (!profileId) profileId = 29961
+
         this.props.setUserProfile(profileId)
         this.props.getUserStatus(profileId)
     }
@@ -28,8 +32,7 @@ class ProfileContainer extends React.Component {
                     : <Profile {...this.props.profile}
                                isAuth={this.props.isAuth}
                                userStatus={this.props.userStatus}
-                               updateStatus={this.updateStatus.bind(this)}
-                    />}
+                               updateStatus={this.updateStatus.bind(this)}/>}
             </>
         )
     }
@@ -38,6 +41,8 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = state => ({
     profile: state.profilePage.profile,
     userStatus: state.profilePage.status,
+    authorizedId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 export default compose(
