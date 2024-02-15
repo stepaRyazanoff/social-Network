@@ -37,7 +37,7 @@ const setAuthUserData = (userId, login, email, isAuth) => ({
 const setAuthUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
 
 export const authMe = () => dispatch => {
-    authAPI.authMe()
+    return authAPI.authMe()
         .then(authData => {
             if (authData.resultCode === 0) {
                 authAPI.getAuthPhoto(authData.data.id)

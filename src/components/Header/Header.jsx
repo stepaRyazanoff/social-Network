@@ -1,6 +1,6 @@
 import React from 'react'
 import cl from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import {NavLink} from "react-router-dom"
 
 const Header = ({userPhoto, id, email, login, isAuth}) => {
     const headerPhoto = !userPhoto ? '' : userPhoto

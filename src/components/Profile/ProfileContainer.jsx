@@ -9,16 +9,17 @@ import {
     setUserProfile,
     updateUserStatus
 } from "../../redux/profileReducer"
+import {withRedirect} from "../../hoc/withRedirect"
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-
         let profileId = this.props.router.params.profileId
-        if (!profileId) profileId = 29961
-
+        if (!profileId) profileId = this.props.authorizedId
         this.props.setUserProfile(profileId)
         this.props.getUserStatus(profileId)
     }
+
+
 
     updateStatus(newStatus) {
         this.props.updateUserStatus(newStatus)
@@ -47,6 +48,7 @@ const mapStateToProps = state => ({
 
 export default compose(
     withRouter,
+    withRedirect,
     connect
     (mapStateToProps,
         {
