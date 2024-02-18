@@ -22,6 +22,7 @@ const ProfileStatus = ({userStatus, updateStatus}) => {
         setStatus(e.target.value)
     }
 
+
     return (
         <div className={cl.status}>
             <div className={cl.statusInner}>
@@ -32,7 +33,8 @@ const ProfileStatus = ({userStatus, updateStatus}) => {
                     && <input autoFocus
                               onBlur={sendStatus}
                               onChange={onTextChange}
-                              value={status} type="text"/>}
+                              value={status}/>
+                }
             </div>
         </div>
     )

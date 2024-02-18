@@ -5,15 +5,16 @@ import {logout} from "../../redux/authReducer"
 // import {withRedirect} from "../../hoc/withRedirect"
 import {compose} from "redux"
 
-const NavbarContainer = ({logout}) => {
+class NavbarContainer extends React.Component {
+    render() {
+        const logOut = () => {
+            this.props.logout()
+        }
 
-    const logOut = () => {
-        logout()
+        return (
+            <Navbar logOut={logOut}/>
+        )
     }
-
-    return (
-        <Navbar logOut={logOut}/>
-    )
 }
 
 export default compose(

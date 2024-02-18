@@ -4,12 +4,12 @@ import Profile from "./Profile"
 import {connect} from "react-redux"
 import {withRouter} from "../../hoc/withRouter"
 import Preloader from "../common/Preloader/Preloader"
+import {withRedirect} from "../../hoc/withRedirect"
 import {
     getUserStatus,
     setUserProfile,
     updateUserStatus
 } from "../../redux/profileReducer"
-import {withRedirect} from "../../hoc/withRedirect"
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -18,8 +18,6 @@ class ProfileContainer extends React.Component {
         this.props.setUserProfile(profileId)
         this.props.getUserStatus(profileId)
     }
-
-
 
     updateStatus(newStatus) {
         this.props.updateUserStatus(newStatus)

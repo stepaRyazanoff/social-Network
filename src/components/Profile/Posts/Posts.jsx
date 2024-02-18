@@ -4,8 +4,11 @@ import cl from './Posts.module.css'
 import PostsForm from "./PostsForm"
 
 const Posts = ({posts, addPost}) => {
-
-    const postsElements = posts.map(p => (<Post key={p.id} message={p.message} id={p.id} likes={p.likesCount}/>))
+    const postsElements = posts
+        .map(p => (<Post id={p.id}
+                         key={p.id}
+                         message={p.message}
+                         likes={p.likesCount}/>))
 
     const onButtonClick = (postText) => {
         addPost(postText)
