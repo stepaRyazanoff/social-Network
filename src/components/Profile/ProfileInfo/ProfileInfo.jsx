@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import cl from './ProfileInfo.module.css'
 import image from '../../../assets/img/unknown-photo.webp'
-import ProfileStatus from "../ProfileStatus/ProfileStatus";
+import ProfileStatus from "../ProfileStatus/ProfileStatus"
+import cn from "classnames"
 
 const ProfileInfo = ({
                          photos: {large},
@@ -11,8 +12,24 @@ const ProfileInfo = ({
                          aboutMe,
                          contacts,
                          userStatus,
-                         updateStatus
+                         updateStatus,
+                         isOwner,
+                         setUserPhoto
                      }) => {
+
+    const [editMode, setEditMode] = useState(false)
+
+    const activateEditMode = () => {
+        setEditMode(true)
+    }
+
+    const deactivateEditMode = () => {
+        setEditMode(false)
+    }
+
+    const onSelectFile = (e) => {
+        if (e.target.files.length) setUserPhoto(e.target.files[0])
+    }
 
     const userLargePhoto = !large ? image : large
 
@@ -20,7 +37,17 @@ const ProfileInfo = ({
         <div className={cl.profileInfo}>
             <div className={cl.profileInfoInner}>
                 <div className={cl.head}>
-                    <img src={userLargePhoto} alt=""/>
+                    <img src={userLargePhoto}
+                         onDoubleClick={activateEditMode}
+                         onClick={deactivateEditMode}
+                         alt=""/>
+                    {isOwner &&
+                        <div className={cn(cl.inputFile, {[cl.active]: editMode})}>
+                            <label className={cl.labelInputFile}>
+                                выберите файл
+                                <input onChange={onSelectFile} type="file"/>
+                            </label>
+                        </div>}
                     <div className={cl.headName}>{fullName}</div>
                 </div>
                 <ProfileStatus userStatus={userStatus} updateStatus={updateStatus}/>

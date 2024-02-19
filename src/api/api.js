@@ -78,6 +78,18 @@ export const profileAPI = {
                 status: newStatus
             })
         return response.data
+    },
+
+    setUserPhoto: async photoFile => {
+        const formData = new FormData()
+        formData.append('image', photoFile)
+        const response = await
+            instance.put('profile/photo', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        return response.data
     }
 }
 

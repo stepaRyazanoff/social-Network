@@ -6,21 +6,36 @@ import {withRouter} from "../../hoc/withRouter"
 import Preloader from "../common/Preloader/Preloader"
 import {withRedirect} from "../../hoc/withRedirect"
 import {
-    getUserStatus,
+    getUserStatus, setPhoto,
     setUserProfile,
     updateUserStatus
 } from "../../redux/profileReducer"
 
 class ProfileContainer extends React.Component {
-    componentDidMount() {
+
+    refreshProfile() {
         let profileId = this.props.router.params.profileId
         if (!profileId) profileId = this.props.authorizedId
         this.props.setUserProfile(profileId)
         this.props.getUserStatus(profileId)
     }
 
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.router.params.profileId !== this.props.router.params.profileId) {
+            this.refreshProfile()
+        }
+    }
+
     updateStatus(newStatus) {
         this.props.updateUserStatus(newStatus)
+    }
+
+    setUserPhoto(photoPile) {
+        this.props.setPhoto(photoPile)
     }
 
     render() {
@@ -28,7 +43,9 @@ class ProfileContainer extends React.Component {
             <>
                 {!this.props.profile
                     ? <Preloader/>
-                    : <Profile {...this.props.profile}
+                    : <Profile isOwner={!this.props.router.params.profileId}
+                               setUserPhoto={this. setUserPhoto.bind(this)}
+                               {...this.props.profile}
                                isAuth={this.props.isAuth}
                                userStatus={this.props.userStatus}
                                updateStatus={this.updateStatus.bind(this)}/>}
@@ -53,4 +70,5 @@ export default compose(
             getUserStatus,
             setUserProfile,
             updateUserStatus,
+            setPhoto,
         }))(ProfileContainer)

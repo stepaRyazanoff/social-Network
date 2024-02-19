@@ -4,6 +4,7 @@ const ADD_POST = 'socialNetwork/profilePage/ADD_POST'
 const SET_USER_PROFILE = 'socialNetwork/profilePage/SET_USER_PROFILE'
 const SET_USER_STATUS = 'socialNetwork/profilePage/SET_USER_STATUS'
 const DELETE_POST = 'socialNetwork/profilePage/DELETE_POST'
+const SET_PHOTO_SUCCESS = 'socialNetwork/profilePage/SET_PHOTO_SUCCESS'
 
 const initialState = {
     posts: [
@@ -44,6 +45,15 @@ export const profileReducer = (state = initialState, action) => {
                 status: action.status
             }
 
+        case SET_PHOTO_SUCCESS:
+            return {
+                ...state,
+                profile: {
+                    ...state.profile,
+                    photos: action.photo
+                }
+            }
+
         default:
             return state
     }
@@ -51,7 +61,9 @@ export const profileReducer = (state = initialState, action) => {
 
 export const addPost = postText => ({type: ADD_POST, postText})
 export const deletePost = postId => ({type: DELETE_POST, postId})
-
+const setPhotoSuccess = photo => ({
+    type: SET_PHOTO_SUCCESS, photo
+})
 export const setProfile = profile => ({
     type: SET_USER_PROFILE, profile
 })
@@ -80,5 +92,13 @@ export const updateUserStatus = (newStatus) => dispatch => {
             if (data.resultCode === 0) {
                 dispatch(setUserStatus(newStatus))
             }
+        })
+}
+
+export const setPhoto = photoFile => dispatch => {
+    profileAPI.setUserPhoto(photoFile)
+        .then(data => {
+            if (data.resultCode === 0)
+                dispatch(setPhotoSuccess(data.data.photos))
         })
 }
