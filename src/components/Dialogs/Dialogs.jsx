@@ -6,15 +6,17 @@ import DialogItem from './DialogItem/DialogItem'
 
 const Dialogs = ({dialogs, messages, sendMessage}) => {
 
-    const dialogsElements = dialogs.map(d => (<DialogItem key={d.id} name={d.name} id={d.id}/>))
-    const messagesElements = messages.map((m, index) => (<Message key={m.id} number={index + 1} message={m.message}/>))
-
-    const onButtonClick = (messageText) => {
-        sendMessage(messageText)
-    }
+    const dialogsElements = dialogs
+        .map(d => (<DialogItem key={d.id}
+                               name={d.name}
+                               id={d.id}/>))
+    const messagesElements = messages
+        .map((m, index) => (<Message key={m.id}
+                                     number={index + 1}
+                                     message={m.message}/>))
 
     const onSubmit = (dialogsData) => {
-        onButtonClick(dialogsData.dialogs)
+        sendMessage(dialogsData.dialogs)
     }
 
     return (
