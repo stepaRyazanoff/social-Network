@@ -1,8 +1,8 @@
 import {authAPI} from "../api/api"
 import {stopSubmit} from "redux-form"
 
-const SET_USER_PHOTO = 'SET_USER_PHOTO'
-const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA'
+const SET_USER_PHOTO = 'socialNetwork/auth/SET_USER_PHOTO'
+const SET_AUTH_USER_DATA = 'socialNetwork/auth/SET_AUTH_USER_DATA'
 
 const initialState = {
     id: null,
@@ -73,3 +73,11 @@ export const logout = () => dispatch => {
             }
         })
 }
+
+
+
+
+
+
+
+

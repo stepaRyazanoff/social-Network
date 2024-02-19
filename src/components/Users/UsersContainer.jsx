@@ -5,8 +5,8 @@ import {
     getUsers,
     subscribeToUser,
     unsubscribeFromUser,
-} from "../../redux/usersReducer";
-import {compose} from "redux";
+} from "../../redux/usersReducer"
+import {compose} from "redux"
 
 class UsersContainer extends React.Component {
 

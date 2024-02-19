@@ -1,12 +1,13 @@
-import {usersAPI} from "../api/api";
+import {usersAPI} from "../api/api"
+import {updateUsersArray} from "../helpers/userReducerHelpers"
 
-const SET_USERS = 'SET_USERS'
-const SUBSCRIBE = 'SUBSCRIBE'
-const UNSUBSCRIBE = 'UNSUBSCRIBE'
-const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT'
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
-const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
-const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
+const SET_USERS = 'socialNetwork/usersPage/SET_USERS'
+const SUBSCRIBE = 'socialNetwork/usersPage/SUBSCRIBE'
+const UNSUBSCRIBE = 'socialNetwork/usersPage/UNSUBSCRIBE'
+const SET_TOTAL_COUNT = 'socialNetwork/usersPage/SET_TOTAL_COUNT'
+const SET_CURRENT_PAGE = 'socialNetwork/usersPage/SET_CURRENT_PAGE'
+const TOGGLE_IS_FETCHING = 'socialNetwork/usersPage/TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'socialNetwork/usersPage/TOGGLE_IS_FOLLOWING_PROGRESS'
 
 const initialState = {
     users: [],
@@ -40,13 +41,24 @@ export const usersReducer = (state = initialState, action) => {
         case SUBSCRIBE:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)
+                users:
+                    updateUsersArray(
+                        state.users,
+                        action.userId,
+                        'id',
+                        {followed: true})
             }
 
         case UNSUBSCRIBE:
             return {
                 ...state,
-                users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
+                users:
+                    updateUsersArray(
+                        state.users,
+                        action.userId,
+                        'id',
+                        {followed: false}
+                    )
             }
 
         case TOGGLE_IS_FETCHING:
@@ -89,24 +101,32 @@ export const getUsers = (pageSize, currentPage) => dispatch => {
         })
 }
 
-export const subscribeToUser = userId => dispatch => {
+
+const subscriptionFlow = (dispatch, userId, apiMethod, actionCreator) => {
     dispatch(toggleFollowingProgress(userId, true))
-    usersAPI.setSubscribe(userId)
+    apiMethod(userId)
         .then((data) => {
             if (data.resultCode === 0) {
-                dispatch(subscribeSuccess(userId))
+                dispatch(actionCreator(userId))
                 dispatch(toggleFollowingProgress(userId, false))
             }
         })
 }
 
-export const unsubscribeFromUser = userId => dispatch => {
-    dispatch(toggleFollowingProgress(userId, true))
-    usersAPI.deleteSubscribe(userId)
-        .then((data) => {
-            if (data.resultCode === 0) {
-                dispatch(unsubscribeSuccess(userId))
-                dispatch(toggleFollowingProgress(userId, false))
-            }
-        })
+export const subscribeToUser = userId => dispatch => {
+    subscriptionFlow(
+        dispatch,
+        userId,
+        usersAPI.setSubscribe.bind(usersAPI),
+        subscribeSuccess)
 }
+
+export const unsubscribeFromUser = userId => dispatch => {
+    subscriptionFlow(
+        dispatch,
+        userId,
+        usersAPI.deleteSubscribe.bind(usersAPI),
+        unsubscribeSuccess)
+}
+
+

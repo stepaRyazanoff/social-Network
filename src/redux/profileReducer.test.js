@@ -37,5 +37,5 @@ test('if the id passed for deletion is incorrect, the length of posts should not
     const newState = profileReducer(state, deletePost(10))
 
     // expectation
-    expect(newState.posts.length).toBe(1)
+    expect(newState.posts.length).toBe(2)
 })

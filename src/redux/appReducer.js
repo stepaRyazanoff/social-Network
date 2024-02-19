@@ -1,6 +1,6 @@
 import {authMe} from "./authReducer"
 
-const SET_INITIALIZE = 'SET_INITIALIZE'
+const SET_INITIALIZE = 'socialNetwork/app/SET_INITIALIZE'
 
 const initialState = {
     initialized: false

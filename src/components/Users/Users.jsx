@@ -1,8 +1,8 @@
 import React from "react"
 import cl from './Users.module.css'
 import User from "./User/User"
-import Pagination from "../common/Pagination/Pagination";
-import Preloader from "../common/Preloader/Preloader";
+import Pagination from "../common/Pagination/Pagination"
+import Preloader from "../common/Preloader/Preloader"
 
 const Users = ({
                    users,
