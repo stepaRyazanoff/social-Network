@@ -1,10 +1,12 @@
 import {profileAPI} from "../api/api"
+import {stopSubmit} from "redux-form"
 
 const ADD_POST = 'socialNetwork/profilePage/ADD_POST'
 const SET_USER_PROFILE = 'socialNetwork/profilePage/SET_USER_PROFILE'
 const SET_USER_STATUS = 'socialNetwork/profilePage/SET_USER_STATUS'
 const DELETE_POST = 'socialNetwork/profilePage/DELETE_POST'
 const SET_PHOTO_SUCCESS = 'socialNetwork/profilePage/SET_PHOTO_SUCCESS'
+const SET_EDIT_MODE = 'socialNetwork/profilePage/SET_EDIT_MODE'
 
 const initialState = {
     posts: [
@@ -13,6 +15,7 @@ const initialState = {
     ],
     profile: null,
     status: '',
+    editMode: false,
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -54,6 +57,12 @@ export const profileReducer = (state = initialState, action) => {
                 }
             }
 
+        case SET_EDIT_MODE:
+            return {
+                ...state,
+                editMode: action.isFetching
+            }
+
         default:
             return state
     }
@@ -79,11 +88,19 @@ export const setUserStatus = status => ({
     type: SET_USER_STATUS, status
 })
 
+export const switchEditMode = isFetching => ({
+    type: SET_EDIT_MODE, isFetching
+})
+
 export const getUserStatus = (userId) => dispatch => {
     profileAPI.getUserStatus(userId)
         .then(status => {
             dispatch(setUserStatus(status))
         })
+}
+
+export const setEditMode = (isFetching) => dispatch => {
+    dispatch(switchEditMode(isFetching))
 }
 
 export const updateUserStatus = (newStatus) => dispatch => {
@@ -102,3 +119,45 @@ export const setPhoto = photoFile => dispatch => {
                 dispatch(setPhotoSuccess(data.data.photos))
         })
 }
+
+export const setUpdatedUserProfile = profileData => (dispatch, getState) => {
+    profileAPI.setUpdatedProfile(profileData)
+        .then(data => {
+            if (data.resultCode === 0) {
+                dispatch(setUserProfile(getState().auth.userId))
+                dispatch(switchEditMode(false))
+            } else {
+                if (data.messages.length > 0 && data.messages[0][0] === 'T') {
+                    dispatch(stopSubmit('profileData', {
+                        _error: data.messages[0]
+                    }))
+                } else if (data.messages.length > 0 && data.messages[0][0] === 'I') {
+                    const stringOfError = data.messages[0]
+                        .slice(data.messages[0]
+                            .indexOf('>') + 1, data.messages[0]
+                            .indexOf(')')).toLowerCase()
+                    if (stringOfError === 'mainlink') {
+                        const pieceOfString = stringOfError.slice(0, 4)
+                        const updatedStringOfError = pieceOfString + 'Link'
+                        dispatch(stopSubmit('profileData', {
+                            'contacts': {
+                                [updatedStringOfError]: data.messages[0]
+                            }
+                        }))
+                    } else if (stringOfError !== 'mainlink') {
+                        dispatch(stopSubmit('profileData', {
+                            'contacts': {
+                                [stringOfError]: data.messages[0]
+                            }
+                        }))
+                    }
+                } else {
+                    dispatch(stopSubmit('profileData', {
+                        _error: 'Some error!!!'
+                    }))
+                }
+            }
+        })
+}
+
+

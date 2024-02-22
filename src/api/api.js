@@ -90,9 +90,23 @@ export const profileAPI = {
                 }
             })
         return response.data
+    },
+
+    setUpdatedProfile: async profileData => {
+        const response = await
+            instance.put('profile',
+                profileData
+            )
+        return response.data
     }
 }
 
 
-
+export const securityAPI = {
+    getCaptcha: async () => {
+        const response = await
+            instance.get('security/get-captcha-url')
+        return response.data
+    }
+}
 

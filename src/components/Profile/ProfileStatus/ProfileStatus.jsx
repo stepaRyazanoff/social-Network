@@ -25,6 +25,9 @@ const ProfileStatus = ({userStatus, updateStatus}) => {
 
     return (
         <div className={cl.status}>
+            <span className={cl.statusSpan}>
+                <b>Status:</b>
+            </span>
             <div className={cl.statusInner}>
                 {!editMode
                     && <span onDoubleClick={onDoubleClicked}>

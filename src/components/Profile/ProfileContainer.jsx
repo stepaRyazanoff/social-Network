@@ -6,7 +6,10 @@ import {withRouter} from "../../hoc/withRouter"
 import Preloader from "../common/Preloader/Preloader"
 import {withRedirect} from "../../hoc/withRedirect"
 import {
-    getUserStatus, setPhoto,
+    getUserStatus,
+    setEditMode,
+    setPhoto,
+    setUpdatedUserProfile,
     setUserProfile,
     updateUserStatus
 } from "../../redux/profileReducer"
@@ -38,16 +41,27 @@ class ProfileContainer extends React.Component {
         this.props.setPhoto(photoPile)
     }
 
+    setUpdatedProfile(profileData) {
+        this.props.setUpdatedUserProfile(profileData)
+    }
+
+    switchEditMode(isFetching) {
+        this.props.setEditMode(isFetching)
+    }
+
     render() {
         return (
             <>
                 {!this.props.profile
                     ? <Preloader/>
                     : <Profile isOwner={!this.props.router.params.profileId}
-                               setUserPhoto={this. setUserPhoto.bind(this)}
+                               setUserPhoto={this.setUserPhoto.bind(this)}
+                               editMode={this.props.editMode}
                                {...this.props.profile}
                                isAuth={this.props.isAuth}
                                userStatus={this.props.userStatus}
+                               setUpdatedProfile={this.setUpdatedProfile.bind(this)}
+                               switchEditMode={this.switchEditMode.bind(this)}
                                updateStatus={this.updateStatus.bind(this)}/>}
             </>
         )
@@ -57,8 +71,9 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = state => ({
     profile: state.profilePage.profile,
     userStatus: state.profilePage.status,
+    editMode: state.profilePage.editMode,
     authorizedId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
 })
 
 export default compose(
@@ -71,4 +86,6 @@ export default compose(
             setUserProfile,
             updateUserStatus,
             setPhoto,
+            setUpdatedUserProfile,
+            setEditMode,
         }))(ProfileContainer)

@@ -1,8 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 import cl from './ProfileInfo.module.css'
 import image from '../../../assets/img/unknown-photo.webp'
 import ProfileStatus from "../ProfileStatus/ProfileStatus"
-import cn from "classnames"
+import Contacts from "./Contacts/Contacts"
+import ProfileHead from "./ProfileHead/ProfileHead"
+import ProfileData from "./ProfileData/ProfileData"
+import ProfileDataForm from "./ProfileData/ProfileDataForm"
 
 const ProfileInfo = ({
                          photos: {large},
@@ -10,56 +13,91 @@ const ProfileInfo = ({
                          lookingForAJob,
                          lookingForAJobDescription,
                          aboutMe,
-                         contacts,
                          userStatus,
                          updateStatus,
                          isOwner,
-                         setUserPhoto
+                         setUserPhoto,
+                         contacts,
+                         setUpdatedProfile,
+                         switchEditMode,
+                         editMode,
                      }) => {
 
-    const [editMode, setEditMode] = useState(false)
-
-    const activateEditMode = () => {
-        setEditMode(true)
-    }
-
-    const deactivateEditMode = () => {
-        setEditMode(false)
-    }
-
-    const onSelectFile = (e) => {
-        if (e.target.files.length) setUserPhoto(e.target.files[0])
+    const initialValuesObj = {
+        fullName,
+        lookingForAJob,
+        lookingForAJobDescription,
+        aboutMe,
+        contacts,
     }
 
     const userLargePhoto = !large ? image : large
 
+    const activateEditMode = () => {
+        switchEditMode(true)
+    }
+
+    const onSelectFile = (e) => {
+        if (e.target.files.length) {
+            setUserPhoto(e.target.files[0])
+        }
+    }
+
+    const onSubmit = profileData => {
+        setUpdatedProfile(profileData)
+    }
+
     return (
         <div className={cl.profileInfo}>
-            <div className={cl.profileInfoInner}>
-                <div className={cl.head}>
-                    <img src={userLargePhoto}
-                         onDoubleClick={activateEditMode}
-                         onClick={deactivateEditMode}
-                         alt=""/>
-                    {isOwner &&
-                        <div className={cn(cl.inputFile, {[cl.active]: editMode})}>
-                            <label className={cl.labelInputFile}>
-                                выберите файл
-                                <input onChange={onSelectFile} type="file"/>
-                            </label>
-                        </div>}
-                    <div className={cl.headName}>{fullName}</div>
-                </div>
-                <ProfileStatus userStatus={userStatus} updateStatus={updateStatus}/>
-                <div className={cl.content}>
-                    <div className={cl.about}>About me: {aboutMe}</div>
-                    <div className={cl.job}>lookingForAJob: {lookingForAJob}</div>
-                    <div className={cl.jobDesc}>lookingForAJobDescription: {lookingForAJobDescription}</div>
-                </div>
-                <div className={cl.contacts}></div>
+            <div>
+                {isOwner &&
+                    <div className={cl.editBtn}>
+                        <button
+                            onClick={activateEditMode}
+                            disabled={editMode}>
+                            Редактировать профиль
+                        </button>
+                    </div>}
+                {editMode
+                    ? <div className={cl.wrapperEdit}>
+                        <ProfileHead isOwner={isOwner}
+                                     editMode={editMode}
+                                     onSelectFile={onSelectFile}
+                                     userLargePhoto={userLargePhoto}/>
+                        <ProfileDataForm contacts={contacts}
+                                         onSubmit={onSubmit}
+                                         initialValues={initialValuesObj}/>
+                    </div>
+                    : <div className={cl.wrapper}>
+                        <div>
+                            <ProfileHead isOwner={isOwner}
+                                         editMode={editMode}
+                                         onSelectFile={onSelectFile}
+                                         userLargePhoto={userLargePhoto}/>
+                        </div>
+                        <div>
+                            <ProfileStatus userStatus={userStatus}
+                                           updateStatus={updateStatus}/>
+                            <span><b>Contacts: </b></span>
+                            {Object.keys(contacts)
+                                .map(key =>
+                                    <Contacts
+                                        key={key}
+                                        contactTitle={key}
+                                        contactValue={contacts[key]}/>)}
+                        </div>
+                        <div>
+                            <ProfileData aboutMe={aboutMe}
+                                         fullName={fullName}
+                                         lookingForAJob={lookingForAJob}
+                                         lookingForAJobDescription={lookingForAJobDescription}/>
+                        </div>
+                    </div>}
             </div>
         </div>
     )
 }
 
 export default ProfileInfo
+
+

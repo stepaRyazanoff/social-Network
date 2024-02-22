@@ -12,10 +12,6 @@
 }
 
 .messagesBox {
-    background-image: url(../../assets/img/bg-dialogs.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
     padding-top: 20px;
     display: flex;
     flex-direction: column;

@@ -1,15 +1,17 @@
-import {authAPI} from "../api/api"
+import {authAPI, securityAPI} from "../api/api"
 import {stopSubmit} from "redux-form"
 
 const SET_USER_PHOTO = 'socialNetwork/auth/SET_USER_PHOTO'
 const SET_AUTH_USER_DATA = 'socialNetwork/auth/SET_AUTH_USER_DATA'
+const SET_CAPTCHA_URL = 'socialNetwork/auth/SET_CAPTCHA_URL'
 
 const initialState = {
     id: null,
     login: null,
     email: null,
     userPhoto: null,
-    isAuth: false
+    isAuth: false,
+    captcha: null
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -18,6 +20,12 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
+            }
+
+        case SET_CAPTCHA_URL:
+            return {
+                ...state,
+                captcha: action.captcha
             }
 
         case SET_USER_PHOTO:
@@ -35,6 +43,7 @@ const setAuthUserData = (userId, login, email, isAuth) => ({
     type: SET_AUTH_USER_DATA, data: {userId, login, email, isAuth}
 })
 const setAuthUserPhoto = (photo) => ({type: SET_USER_PHOTO, photo})
+const setCaptchaUrl = (captcha) => ({type: SET_CAPTCHA_URL, captcha})
 
 export const authMe = () => dispatch => {
     return authAPI.authMe()
@@ -56,13 +65,20 @@ export const login = (email, password, rememberMe, captcha) => dispatch => {
             if (data.resultCode === 0) {
                 dispatch(authMe())
             } else {
-                const errorText =
-                    data.messages.length > 0
-                        ? data.messages[0]
-                        : 'Some error!!!'
+                if (data.resultCode === 10) {
+                    dispatch(getCaptchaUrl())
+                }
+                const errorText = data.messages.length > 0
+                    ? data.messages[0]
+                    : 'Some error!!!'
                 dispatch(stopSubmit('login', {_error: errorText}))
             }
         })
+}
+
+export const getCaptchaUrl = () => dispatch => {
+    securityAPI.getCaptcha()
+        .then(data => dispatch(setCaptchaUrl(data.url)))
 }
 
 export const logout = () => dispatch => {

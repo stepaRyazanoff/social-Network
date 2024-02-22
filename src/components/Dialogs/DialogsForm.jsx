@@ -7,7 +7,8 @@ import {Textarea} from "../common/FormsControls/FormsControls"
 const DialogsForm = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            {createField('dialogs',
+            {createField(
+                'dialogs',
                 required,
                 null,
                 Textarea,

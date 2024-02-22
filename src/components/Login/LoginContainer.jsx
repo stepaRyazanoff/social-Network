@@ -5,22 +5,27 @@ import Login from "./Login"
 import {compose} from "redux"
 import {Navigate} from "react-router"
 
-const LoginContainer = (props) => {
+class LoginContainer extends React.Component {
 
-    const logIn = (login, password, rememberMe) => {
-        props.login(login, password, rememberMe)
+    logIn(login, password, rememberMe, captcha) {
+        this.props.login(login, password, rememberMe, captcha)
     }
 
-    return (
-        <>
-            {props.isAuth && <Navigate to={'/profile'}/>}
-            <Login logIn={logIn}/>
-        </>
-    )
+    render() {
+        return (
+            <>
+                {this.props.isAuth && <Navigate to={'/profile'}/>}
+
+                <Login logIn={this.logIn.bind(this)}
+                       captcha={this.props.captcha}/>
+            </>
+        )
+    }
 }
 
 const mapStateToProps = state => ({
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    captcha: state.auth.captcha
 })
 
 export default compose(connect

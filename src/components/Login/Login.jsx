@@ -2,10 +2,10 @@ import React from "react"
 import cl from './Login.module.css'
 import LoginForm from "./LoginForm"
 
-const Login = ({logIn}) => {
+const Login = ({logIn, captcha}) => {
     const onSubmit = (loginData) => {
-        const {login, password, rememberMe} = loginData
-        logIn(login, password, rememberMe)
+        const {login, password, rememberMe, captcha} = loginData
+        logIn(login, password, rememberMe, captcha)
     }
 
     return (
@@ -13,7 +13,8 @@ const Login = ({logIn}) => {
             <div className={cl.container}>
                 <div className={cl.loginInner}>
                     <h4>Login</h4>
-                    <LoginForm onSubmit={onSubmit}/>
+                    <LoginForm captcha={captcha}
+                               onSubmit={onSubmit}/>
                 </div>
             </div>
         </div>
