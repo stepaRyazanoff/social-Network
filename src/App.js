@@ -10,7 +10,7 @@ import {getInitialize} from "./redux/appReducer"
 import React, {lazy, Suspense} from "react"
 import {compose} from "redux"
 import {withRouter} from "./hoc/withRouter"
-// import DialogsContainer from "./components/Dialogs/DialogsContainer"
+import {Navigate} from "react-router"
 
 const ProfileContainer =
     lazy(() =>
@@ -39,10 +39,17 @@ class App extends React.Component {
                                 <main className='main'>
                                     <Suspense fallback={<div>Loading...</div>}>
                                         <Routes>
+                                            <Route path='/' element={<Navigate to='/profile'/>}/>
                                             <Route path='/dialogs/*' element={<DialogsContainer/>}/>
                                             <Route path='/profile/:profileId?' element={<ProfileContainer/>}/>
                                             <Route path='/users' element={<UsersContainer/>}/>
                                             <Route path='/login' element={<LoginContainer/>}/>
+                                            <Route path='*'
+                                                   element={
+                                                       <div className='not-found'>
+                                                           <h1>404 NOT FOUND</h1>
+                                                       </div>
+                                                   }/>
                                         </Routes>
                                     </Suspense>
                                 </main>

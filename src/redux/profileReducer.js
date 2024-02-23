@@ -92,18 +92,18 @@ export const switchEditMode = isFetching => ({
     type: SET_EDIT_MODE, isFetching
 })
 
-export const getUserStatus = (userId) => dispatch => {
+export const getUserStatus = userId => dispatch => {
     profileAPI.getUserStatus(userId)
         .then(status => {
             dispatch(setUserStatus(status))
         })
 }
 
-export const setEditMode = (isFetching) => dispatch => {
+export const setEditMode = isFetching => dispatch => {
     dispatch(switchEditMode(isFetching))
 }
 
-export const updateUserStatus = (newStatus) => dispatch => {
+export const updateUserStatus = newStatus => dispatch => {
     profileAPI.updateUserStatus(newStatus)
         .then(data => {
             if (data.resultCode === 0) {

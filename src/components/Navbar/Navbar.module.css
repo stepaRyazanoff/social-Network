@@ -3,6 +3,7 @@
     max-width: 150px;
     width: 100%;
     padding: 20px 40px;
+    margin-right: 1px;
 }
 
 .menu li + li {

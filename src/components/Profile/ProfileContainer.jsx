@@ -4,7 +4,6 @@ import Profile from "./Profile"
 import {connect} from "react-redux"
 import {withRouter} from "../../hoc/withRouter"
 import Preloader from "../common/Preloader/Preloader"
-import {withRedirect} from "../../hoc/withRedirect"
 import {
     getUserStatus,
     setEditMode,
@@ -78,7 +77,6 @@ const mapStateToProps = state => ({
 
 export default compose(
     withRouter,
-    withRedirect,
     connect
     (mapStateToProps,
         {

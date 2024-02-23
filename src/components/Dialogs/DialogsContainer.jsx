@@ -2,7 +2,6 @@ import React from 'react'
 import {compose} from "redux"
 import {connect} from "react-redux"
 import Dialogs from "./Dialogs"
-import {withRedirect} from "../../hoc/withRedirect"
 import {sendMessage} from "../../redux/dialogsReducer"
 
 class DialogsContainer extends React.Component {
@@ -27,7 +26,6 @@ const mapStateToProps = state => ({
 })
 
 export default compose(
-    withRedirect,
     connect(
         mapStateToProps,
         {
