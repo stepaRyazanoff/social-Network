@@ -12,6 +12,7 @@ import {
     setUserProfile,
     updateUserStatus
 } from "../../redux/profileReducer"
+import {withRedirect} from "../../hoc/withRedirect";
 
 class ProfileContainer extends React.Component {
 
@@ -77,6 +78,7 @@ const mapStateToProps = state => ({
 
 export default compose(
     withRouter,
+    withRedirect,
     connect
     (mapStateToProps,
         {
